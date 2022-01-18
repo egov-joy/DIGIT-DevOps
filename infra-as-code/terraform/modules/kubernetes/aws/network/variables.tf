@@ -3,7 +3,9 @@ variable "vpc_cidr_block" {
 }
 
 variable "cluster_name" {
+  default = "divoc-platform-qa"
 }
+
 
 variable "availability_zones" {
   default = ["ap-south-1a", "ap-south-1b", "ap-south-1c"]

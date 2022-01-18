@@ -2,12 +2,15 @@ resource "aws_db_subnet_group" "db_subnet_group" {
   name       = "db-subnet-group-${var.environment}"
   subnet_ids = "${var.subnet_ids}"
 
-    tags = "${
-    map(
-      "Name", "db-subnet-group-${var.environment}",
-      "environment", "${var.environment}"
-    )
-  }"
+#    tags = "${
+#    map(
+#      "Name", "db-subnet-group-${var.environment}",
+#      "environment", "${var.environment}"
+#    )
+#  }"
+  tags = {
+    Name =  "divoc-platform-qa-db-subnet-group"
+  }
 }
 
 resource "aws_db_instance" "rds_postgres" {
@@ -24,11 +27,15 @@ resource "aws_db_instance" "rds_postgres" {
   backup_retention_period = "${var.backup_retention_days}"
   db_subnet_group_name    = "${aws_db_subnet_group.db_subnet_group.name}"
   copy_tags_to_snapshot   = "true"
+  final_snapshot_identifier = "final-${var.db_name}"
 
-    tags = "${
-    map(
-      "Name", "${var.environment}-db",
-      "environment", "${var.environment}"
-    )
-  }"  
+#    tags = "${
+#    map(
+#      "Name", "${var.environment}-db",
+#      "environment", "${var.environment}"
+#    )
+#  }"
+  tags = {
+    Name = "divoc-platform-qa-db"
+  }
 }

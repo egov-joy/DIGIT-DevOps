@@ -1,4 +1,5 @@
 variable "cluster_name" {
+    default = "divoc-platform-qa"
 }
 
 variable "vpc_id" {
